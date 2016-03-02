@@ -15,5 +15,10 @@
     "semantic-ui": "^2.1.8",
     "selectize": "miguelcobain/selectize.js#master",
     "bootstrap": "~3.3.5"
+  },
+  "resolutions": {
+    "ember": "2.2.0",
+    "qunit": "1.20.0",
+    "loader.js": "3.4.0"
   }
 }
