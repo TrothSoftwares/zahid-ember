@@ -56,6 +56,7 @@ ENV['ember-simple-auth'] = {
   }
 
   if (environment === 'test') {
+    ENV.APP.host =  'http://zahid-rails.herokuapp.com';
     // Testem prefers this...
     ENV.baseURL = '/';
     ENV.locationType = 'none';
@@ -68,6 +69,7 @@ ENV['ember-simple-auth'] = {
   }
 
   if (environment === 'production') {
+    ENV.APP.host =  'http://zahid-rails.herokuapp.com';
 
   }
 
