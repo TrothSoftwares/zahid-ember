@@ -8,6 +8,8 @@
     "test": "tests"
   },
   "scripts": {
+
+    "postinstall": "cd node_modules/ember-lodash && npm install",
     "build": "ember build",
     "start": "ember server",
     "test": "ember test"
