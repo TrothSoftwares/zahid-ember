@@ -7,7 +7,10 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('dashboard', {path: '/'}, function() {
-    this.route('inventory');
+    this.route('inventory', function() {
+      
+      this.route('new');
+    });
   });
   this.route('login');
 });

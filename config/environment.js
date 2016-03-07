@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'zahid-ember',
     environment: environment,
     baseURL: '/',
-    locationType: 'auto',
+    //locationType: 'auto',
 
     contentSecurityPolicy: {
       'default-src': "'self' *",

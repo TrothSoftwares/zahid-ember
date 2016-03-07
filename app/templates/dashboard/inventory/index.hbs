@@ -1,0 +1,28 @@
+<h2 class="ui dividing header">Products</h2>
+<button {{action "createContract"}}>ccc</button>
+{{link-to  "New Product" 'dashboard.inventory.new' }}
+
+<div class="ui top attached tabular menu">
+  {{#each producttypes as |producttype|}}
+  <a class="item {{producttype.activeclass}}" {{action "changeActiveClass" producttype}} data-tab="{{producttype.producttype}}">{{producttype.producttype}}</a>
+  {{/each}}
+</div>
+
+
+{{#each producttypes as |producttype|}}
+<div class="ui bottom attached tab segment {{producttype.activeclass}} " data-tab="{{producttype.producttype}}">
+  {{models-table
+    data=products
+    columns=columns
+  }}
+</div>
+{{/each}}
+
+{{outlet}}
+
+<script>
+$('.menu .item')
+  .tab()
+;
+</script>
+{{outlet}}
