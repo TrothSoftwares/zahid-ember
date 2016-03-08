@@ -5,29 +5,33 @@ export default Ember.Controller.extend({
   actions:{
 
 
-  createProduct: function(){
+    createProduct: function(){
 
-    var controller = this;
+      var controller = this;
 
-    var product = this.store.createRecord('product', {
-            itemcode :this.get('itemcode'),
-            productname :this.get('productname'),
-            initialstocklevel :this.get('initialstocklevel'),
-            initialcostprice :this.get('initialcostprice'),
-            retailprice :this.get('retailprice'),
-            buyprice :this.get('buyprice'),
-            supplier :this.get('supplier'),
-            producttype : this.get('producttype'),
-            productbrand :this.get('productbrand')
+      var product = this.store.createRecord('product', {
+        itemcode :this.get('itemcode'),
+        productname :this.get('productname'),
+        initialstocklevel :this.get('initialstocklevel'),
+        initialcostprice :this.get('initialcostprice'),
+        retailprice :this.get('retailprice'),
+        buyprice :this.get('buyprice'),
+        supplier :this.get('supplier'),
+        producttype : this.get('typename'),
+        productbrand :this.get('brandname')
 
-          });
+      });
 
-        product.save().then(function(){
+      product.save().then(function(){
         controller.set('itemcode','');
         controller.set('productname','');
-        controller.set('producttype','');
-        controller.set('productsupplier','');
-        controller.set('productbrand','');
+        controller.set('initialstocklevel','');
+        controller.set('initialcostprice','');
+        controller.set('buyprice','');
+        controller.set('retailprice','');
+        controller.set('supplier','');
+        controller.set('typename','');
+        controller.set('brandname','');
       }).catch(function(){
         controller.notifications.addNotification({
           message: 'Sorry, cant save at the moment !' ,
@@ -36,86 +40,127 @@ export default Ember.Controller.extend({
         });
       });
 
-  },
+    },
+
+    openSupplierModal: function(){
+      Ember.$('.ui.newsupplier.modal')
+      .modal('show')
+      ;
+    },
+
+    createSupplier: function(){
+
+      var controller = this;
+      var newsupplier = this.store.createRecord('supplier', {
+        companyname :this.get('companyname'),
+        email :this.get('email'),
+        address1 :this.get('address1'),
+        address2 :this.get('address2'),
+        suburb :this.get('suburb'),
+        city :this.get('city'),
+        state :this.get('state'),
+        country : this.get('country'),
+        zipcode :this.get('zipcode')
+      });
+
+      newsupplier.save().then(function(){
+        controller.set('companyname','');
+        controller.set('email','');
+        controller.set('address1','');
+        controller.set('address2','');
+        controller.set('suburb','');
+        controller.set('city','');
+        controller.set('state','');
+        controller.set('country','');
+        controller.set('zipcode','');
+
+        controller.get('suppliers').pushObject(newsupplier._internalModel);
+        controller.set('supplier',newsupplier);
+        Ember.$('.ui.newsupplier.modal')
+        .modal('hide')
+        ;
+      }).catch(function(){
+        controller.notifications.addNotification({
+          message: 'Sorry, cant save at the moment !' ,
+          type: 'error',
+          autoClear: true
+        });
+      });
+
+    },
+
+    openProductBrandModal:function(){
+
+      Ember.$('.ui.newproductbrand.modal')
+      .modal('show')
+      ;
+    },
+
+    createProductBrand: function(){
+
+      var controller = this;
+      var newproductbrandsaved = this.store.createRecord('productbrand', {
+        brandname :this.get('newproductbrand'),
+      });
+
+      newproductbrandsaved.save().then(function(){
+        controller.set('newproductbrand','');
+
+        controller.get('productbrands').pushObject(newproductbrandsaved._internalModel);
+        controller.set('brandname',newproductbrandsaved);
+        Ember.$('.ui.newproductbrand.modal')
+        .modal('hide')
+        ;
+      }).catch(function(){
+        controller.notifications.addNotification({
+          message: 'Sorry, cant save at the moment !' ,
+          type: 'error',
+          autoClear: true
+        });
+      });
 
 
 
-  openSupplierModal: function(){
-    Ember.$('.ui.modal')
-    .modal('show')
-    ;
-  },
+    },
 
-  createSupplier: function(){
 
-    var controller = this;
-        var newsupplier = this.store.createRecord('supplier', {
-                companyname :this.get('companyname'),
-                email :this.get('email'),
-                address1 :this.get('address1'),
-                address2 :this.get('address2'),
-                suburb :this.get('suburb'),
-                city :this.get('city'),
-                state :this.get('state'),
-                country : this.get('country'),
-                zipcode :this.get('zipcode')
-              });
 
-            newsupplier.save().then(function(){
-            controller.set('companyname','');
-            controller.set('email','');
-            controller.set('address1','');
-            controller.set('address2','');
-            controller.set('suburb','');
-            controller.set('city','');
-            controller.set('state','');
-            controller.set('country','');
-            controller.set('zipcode','');
-//  console.log(JSON.stringify(supplier));
-//  controller.set('suppliers', this.store.findAll('supplier'));
-//  console.log(JSON.stringify(controller.producttypes));
-//  console.log(JSON.stringify(controller.get('producttypes')));
-//
-// console.log('-------------');
-//              controller.get('suppliers').pushObject(supplier);
-//
-//             console.log(controller.get('suppliers'));
-//              controller.get('suppliers').reload();
-//              console.log('++++++++++');
-          }).catch(function(){
-            controller.notifications.addNotification({
-              message: 'Sorry, cant save at the moment !' ,
-              type: 'error',
-              autoClear: true
-            });
-          });
+    openProductTypeModal:function(){
+
+      Ember.$('.ui.newproducttype.modal')
+      .modal('show')
+      ;
+    },
+
+    createProductType: function(){
+
+      var controller = this;
+      var newproducttypesaved = this.store.createRecord('producttype', {
+        typename :this.get('newproducttype')
+
+      });
+
+      newproducttypesaved.save().then(function(){
+        controller.set('newproducttype','');
+
+        controller.get('producttypes').pushObject(newproducttypesaved._internalModel);
+        controller.set('typename',newproducttypesaved);
+        Ember.$('.ui.newproducttype.modal')
+        .modal('hide')
+        ;
+      }).catch(function(){
+        controller.notifications.addNotification({
+          message: 'Sorry, cant save at the moment !' ,
+          type: 'error',
+          autoClear: true
+        });
+      });
+
+    },
 
 
 
 
-
-          // var suppliers = this.get('suppliers').toArray();
-          // console.log(JSON.stringify(suppliers));
-          // suppliers.addObjects(this.get('suppliers'));
-          // suppliers.addObject(supplier);
-          // this.set('suppliers', suppliers);
-
-           var getsuppliers = controller.get('suppliers').toArray();
-           console.log(typeof(getsuppliers));
-           console.log(Ember.isArray(getsuppliers));
-           getsuppliers.pushObject(newsupplier);
-
-           controller.set('supplier',newsupplier);
-
-           this.refresh();+
-
-            // this.get('suppliers').pushObject(newsupplier);
-          // this.set('supplier')
-          // this.get('suppliers').forEach(function(supplier) {
-          //   this.get('suppliers').pushObject(supplier._internalModel);
-          // });
 
   }
-
-}
 });

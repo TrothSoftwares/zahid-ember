@@ -6,7 +6,9 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin,{
   host: ENV.APP.host,
   authorizer: 'authorizer:devise',
   plurals: {
-    enquiry: 'enquiries'
+    enquiry: 'enquiries',
+    productbrand: 'productbrands',
+    producttype: 'producttypes'
   },
 
 });
