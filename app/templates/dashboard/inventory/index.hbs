@@ -1,37 +1,34 @@
 <h2 class="ui dividing header">Products</h2>
 
-
-
  {{link-to  "New Product" 'dashboard.inventory.new' }}
 
-
-
-
 <div class="ui top attached tabular menu">
-  <a class="item {{allActiveClass}}" {{action "changeActiveClass" 'active'}} data-tab="{{producttype.typename}}">All</a>
+  <a class="item {{allActiveClass}}" {{action "changeActiveClass" 'active'}}  >All</a>
   {{#each producttypes as |producttype|}}
-  <a class="item {{producttype.activeclass}}" {{action "changeActiveClass" producttype}} data-tab="{{producttype.typename}}">{{producttype.typename}}</a>
+  <a class="item {{producttype.activeclass}}" {{action "changeActiveClass" producttype}}  >{{producttype.typename}}</a>
   {{/each}}
 </div>
-
-
-
 
 <div class="ui bottom attached tab segment {{allActiveClass}} ">
   {{models-table
     data=computedProducts
     columns=columns
     customMessages=customMessages
-     
-  }}
+    useFilteringByColumns=false
+    showColumnsDropdown=false
+    useNumericPagination=true
+   }}
 </div>
 
 {{#each producttypes as |producttype|}}
-<div class="ui bottom attached tab segment {{producttype.activeclass}} " data-tab="{{producttype.typename}}">
+<div class="ui bottom attached tab segment {{producttype.activeclass}}" >
   {{models-table
     data=computedProducts
     columns=columns
     customMessages=customMessages
+    useFilteringByColumns=false
+    showColumnsDropdown=false
+    useNumericPagination=true
   }}
 </div>
 {{/each}}

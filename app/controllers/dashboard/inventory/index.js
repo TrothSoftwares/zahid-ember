@@ -2,25 +2,25 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  columns: [
-    {
-      "propertyName": "id", "title": "ID"
-    },
-    {
-      "propertyName": "itemcode","title": "Item Code"
-    },
-    {
-      "propertyName": "productname","title": "Product Name"
-    },
-    {
-      "propertyName": "producttype.typename","producttype.typename": "Product Type"
-    },
-    {
-      "title":"View" , "template":"custom/viewbutton"
-    },
+    columns: [
+      {
+        "propertyName": "id", "title": "ID"
+      },
+      {
+        "propertyName": "itemcode","title": "Item Code"
+      },
+      {
+        "propertyName": "productname","title": "Product Name"
+      },
+      {
+        "propertyName": "producttype.typename","title": "Product Type"
+      },
+      {
+        "title":"View" , "template":"custom/viewbutton"
+      },
 
 
-  ],
+    ],
 
 
     customMessages: {
@@ -40,14 +40,17 @@ export default Ember.Controller.extend({
 
 
     computedProducts: function() {
+      console.log('called computed');
       var currentProductType = this.get('currentProductType');
       if (currentProductType === 'all'){
+        console.log('called all');
         return this.get('products');
       }
       else{
+        console.log('called with protype');
         return this.get('products').filterBy('producttype.typename', currentProductType);
       }
-    }.property('currentProductType'),
+    }.property('currentProductType','products'),
 
 
     actions: {
