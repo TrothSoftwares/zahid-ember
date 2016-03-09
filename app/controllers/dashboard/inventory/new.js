@@ -40,6 +40,8 @@ export default Ember.Controller.extend({
         });
       });
 
+      controller.transitionToRoute('dashboard.inventory.index');
+
     },
 
     openSupplierModal: function(){
@@ -73,6 +75,7 @@ export default Ember.Controller.extend({
         controller.set('state','');
         controller.set('country','');
         controller.set('zipcode','');
+        controller.set('phone','');
 
         controller.get('suppliers').pushObject(newsupplier._internalModel);
         controller.set('supplier',newsupplier);
@@ -107,6 +110,7 @@ export default Ember.Controller.extend({
         controller.set('newproductbrand','');
 
         controller.get('productbrands').pushObject(newproductbrandsaved._internalModel);
+
         controller.set('brandname',newproductbrandsaved);
         Ember.$('.ui.newproductbrand.modal')
         .modal('hide')
@@ -142,8 +146,9 @@ export default Ember.Controller.extend({
 
       newproducttypesaved.save().then(function(){
         controller.set('newproducttype','');
+        // console.log('----');
 
-        controller.get('producttypes').pushObject(newproducttypesaved._internalModel);
+        // console.log(JSON.stringify(controller.get('productbrands')));
         controller.set('typename',newproducttypesaved);
         Ember.$('.ui.newproducttype.modal')
         .modal('hide')
@@ -155,6 +160,9 @@ export default Ember.Controller.extend({
           autoClear: true
         });
       });
+
+
+      this.get('producttypes').pushObject(newproducttypesaved._internalModel);
 
     },
 

@@ -5,12 +5,11 @@
 
 
 
+{{#each producttypes as |producttype|}}
+{{producttype.typename}}
+{{/each}}
 
- {{#each itemOneProduct as |itemOneProduc|}}
 
- {{itemOneProduc.producttype.typename}}
-
- {{/each}}
 <div class="ui top attached tabular menu">
   {{#each producttypes as |producttype|}}
   <a class="item {{producttype.activeclass}}" {{action "changeActiveClass" producttype}} data-tab="{{producttype.typename}}">{{producttype.typename}}</a>
@@ -19,8 +18,7 @@
 
 
 
-{{filterComputed}}
-{{itemOneProduct}}
+
 {{#each producttypes as |producttype|}}
 <div class="ui bottom attached tab segment {{producttype.activeclass}} " data-tab="{{producttype.typename}}">
   {{models-table
